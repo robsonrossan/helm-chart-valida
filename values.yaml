@@ -1,0 +1,11 @@
+   deployment:
+     name: valida-senha
+     image: 
+       app: robsonrossan/valida:v1
+
+   service:
+     name: valida-senhasvc
+     type: ClusterIP
+     ingress:
+       enabled: true
+       hosts: ["165.227.255.180.nip.io"]

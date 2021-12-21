@@ -1,0 +1,21 @@
+{{ if .Values.service.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-api-ingress
+spec:
+ ingressClassName: ngix
+ rules:
+   {{- range .Values.service.ingress.hosts  }}
+   - host: {{ . }}
+     http:
+       paths:
+         - path: /
+           pathType: Prefix
+           backend:
+             service:
+               name: {{ $.Values.service.name }}-api-service
+               port:
+                 number: 80
+    {{- end }}
+{{ end }}
